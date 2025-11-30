@@ -1,20 +1,29 @@
 {
-  "$schema": "https://json.schemastore.org/tsconfig",
+  "compileOnSave": false,
   "compilerOptions": {
-    "composite": false,
-    "declaration": true,
-    "declarationMap": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "inlineSources": false,
-    "isolatedModules": true,
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
-    "preserveWatchOutput": true,
-    "skipLibCheck": true,
-    "strict": true
+      "rootDir": ".",
+      "sourceMap": true,
+      "declaration": false,
+      "moduleResolution": "node",
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "importHelpers": true,
+      "target": "es2017",
+      "module": "esnext",
+      "lib": ["esnext", "dom"],
+      "skipLibCheck": true,
+      "skipDefaultLibCheck": true,
+      "noImplicitReturns": false,
+      "baseUrl": ".",
+      "strictNullChecks": true,
+      "allowSyntheticDefaultImports": true,
+      "esModuleInterop": true,
+      "typeRoots": ["./types", "./node_modules/@types", "./node_modules"],
+      "paths": {
+          "@chat-ai/ui": ["packages/ui/index.ts"]
+      },
+      "types": ["node", "ts-reset"]
   },
-  "exclude": ["node_modules"]
+  "include": [],
+  "files": []
 }
