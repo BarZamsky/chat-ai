@@ -11,14 +11,15 @@
     "isolatedModules": true,
     "module": "ESNext",
     "moduleResolution": "Bundler",
+    "resolveJsonModule": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "preserveWatchOutput": true,
-    "skipLibCheck": true,
+    "target": "ES2022",
     "strict": true,
-    "paths": {
-      "@chat-ai/*": ["packages/*"]
-    }
+    "skipLibCheck": true,
+    "outDir": "dist",
+    "allowJs": false
   },
   "include": [],
   "files": []

@@ -1,0 +1,11 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "jsx": "react-jsx",
+        "outDir": "../../dist/out-tsc",
+        "types": ["node", "vite-react"]
+    },
+    "files": ["index.tsx", "vite-env.d.ts"],
+    "include": ["src/**/*", "tailwind.config.ts", "src/**/*.json", "**/*.d.ts"],
+    "exclude": ["**/*.spec.ts", "**/*_spec.ts", "**/*.spec.tsx", "**/*_spec.tsx", "public/*"]
+}

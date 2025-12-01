@@ -1,5 +1,5 @@
 {
-    "extends": "@chat-ai/typescript-config/base.json",
-    "include": ["src"],
+    "extends": "@repo/typescript-config/base.json",
+    "include": ["src"]
   }
   

@@ -9,3 +9,4 @@ export const appRouter = createRouter({
 export type AppRouter = typeof appRouter
 export * from './context'
 export * from './client'
+export * from './routers'

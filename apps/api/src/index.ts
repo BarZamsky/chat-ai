@@ -1,8 +1,8 @@
 import { fastifyTRPCPlugin } from '@trpc/server/adapters/fastify'
 import Fastify from 'fastify'
 import cors from '@fastify/cors'
-import { appRouter } from '@chat-ai/trpc'
-import { createContext } from '@chat-ai/trpc'
+import { appRouter } from '@repo/trpc'
+import { createContext } from '@repo/trpc'
 
 const app = Fastify({
     routerOptions: {

@@ -1,5 +1,5 @@
 import { CreateFastifyContextOptions } from '@trpc/server/adapters/fastify'
-import { db } from '@chat-ai/db'
+import { db } from '@repo/db'
 
 export interface User {
     name: string[] | string
