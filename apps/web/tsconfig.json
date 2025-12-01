@@ -1,23 +1,7 @@
 {
-  "extends": "@chat-ai/typescript-config/base.json",
+  "extends": "@chat-ai/typescript-config/vite.json",
+  "include": ["src"],
   "compilerOptions": {
-    "target": "ESNext",
-    "useDefineForClassFields": true,
-    "module": "ESNext",
-    "strict": true,
-    "moduleResolution": "Node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "types": ["ts-reset", "vite-react"],
-    "noEmit": true,
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "allowJs": false,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "jsx": "react-jsx",
-    "paths": {
-        "#/*": ["apps/web/src/*"],
-        "@chat-ai/ui": ["packages/ui/index.ts"]
-      }
-    }
+    "jsx": "react-jsx"
+  }
 }

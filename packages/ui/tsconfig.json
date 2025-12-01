@@ -1,15 +1,5 @@
 {
-  "extends": "../typescript-config/base.json",
-  "compilerOptions": {
-      "jsx": "react-jsx",
-      "allowJs": true,
-      "forceConsistentCasingInFileNames": true,
-      "strict": true,
-      "noImplicitOverride": true,
-      "noImplicitReturns": true,
-      "noFallthroughCasesInSwitch": true,
-      "strictNullChecks": true
-  },
-  "files": [],
-  "include": []
+  "extends": "@chat-ai/typescript-config/react-library.json",
+  "include": ["."],
+  "exclude": ["node_modules"]
 }

@@ -10,12 +10,15 @@
     "lint": "eslint \"src/**/*.ts\""
   },
   "dependencies": {
+    "@chat-ai/trpc": "workspace:*",
     "@chat-ai/ui": "workspace:*",
     "@tanstack/react-query": "^5.90.11",
     "@trpc/client": "^11.7.2",
     "@trpc/react-query": "^11.7.2",
+    "@trpc/tanstack-react-query": "^11.7.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "superjson": "^2.2.6",
     "zod": "^4.1.13"
   },
   "devDependencies": {

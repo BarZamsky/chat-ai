@@ -5,6 +5,7 @@
     "dist"
   ],
   "exports": {
+    ".": "./index.ts",
     "./styles.css": "./dist/index.css",
     "./*": "./dist/*.js"
   },

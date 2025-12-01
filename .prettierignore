@@ -2,11 +2,4 @@
 
 /dist
 /coverage
-apps/extension/assets/redirectPage/index.html
-libs/i18n/src/mapping.ts
-.github/actions/**/main.js
-.github/actions/**/package.json
-.swm
-
-/.nx/cache
-/.nx/workspace-data
+/.turbo
