@@ -1,7 +1,17 @@
 @import "tailwindcss";
-@import "tw-animate-css";
 
 @theme {
+  --color-primary: #4338CA;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #64748b;
+  --color-secondary-foreground: #ffffff;
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #ffffff;
+  --color-accent: #f1f5f9;
+  --color-accent-foreground: #0f172a;
+  --color-background: #ffffff;
+  --color-input: #e2e8f0;
+  --color-ring: #4338CA;
   --color-blue-1000: #2a8af6;
   --color-purple-1000: #a853ba;
   --color-red-1000: #e92a67;

@@ -1,0 +1,5 @@
+@import '@repo/tailwind-config';
+
+/* Tell Tailwind v4 where to scan for class names */
+@source "../../packages/**/*.{js,ts,jsx,tsx}";
+@source "./**/*.{js,ts,jsx,tsx}";

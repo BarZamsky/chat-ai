@@ -1,58 +1,44 @@
-import tailwindcss from 'tailwindcss'
+import type { StorybookConfig } from '@storybook/react-vite'
+import path, { dirname } from 'path'
+import { fileURLToPath } from 'url'
+import tailwindcss from '@tailwindcss/postcss'
 import { mergeConfig, UserConfig } from 'vite'
-import checker from 'vite-plugin-checker'
-import svgr from 'vite-plugin-svgr'
-import tsConfigPaths from 'vite-tsconfig-paths'
-import tailwindConfig from '../tailwind.config'
+
+/**
+ * This function is used to resolve the absolute path of a package.
+ * It is needed in projects that use Yarn PnP or are set up within a monorepo.
+ */
+function getAbsolutePath(value: string): any {
+    return dirname(fileURLToPath(import.meta.resolve(`${value}/package.json`)))
+}
 
 const viteFinal = async (config: UserConfig) => {
     return mergeConfig(config, {
         css: {
             postcss: {
-                plugins: [tailwindcss()],
+                plugins: [
+                    tailwindcss({
+                        base: path.resolve('../'),
+                    }),
+                ],
             },
         },
-        plugins: [
-            tsConfigPaths({
-                root: '../../../',
-            }),
-            svgr({
-                svgrOptions: {
-                    ref: true,
-                    svgoConfig: {
-                        plugins: [
-                            {
-                                name: 'preset-default',
-                                params: {
-                                    overrides: {
-                                        removeUselessStrokeAndFill: false,
-                                        removeViewBox: false,
-                                    },
-                                },
-                            },
-                        ],
-                    },
-                },
-            }),
-            checker({
-                typescript: {
-                    root: 'libs/ui',
-                    tsconfigPath: 'tsconfig.lib.json',
-                    buildMode: true,
-                },
-            }),
-        ],
     })
 }
 
-const config = {
-    stories: ['../src/**/*.stories.@(js|jsx|ts|tsx|mdx)'],
-    addons: ['@storybook/addon-essentials', '@nx/react/plugins/storybook', 'storybook-addon-react-router-v6'],
+const config: StorybookConfig = {
+    stories: [
+        '../src/**/*.mdx',
+        '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)',
+        '../../../packages/ui/src/**/*.stories.@(js|jsx|mjs|ts|tsx)',
+    ],
     viteFinal,
-    framework: {
-        name: '@storybook/react-vite',
-        options: {},
-    },
+    addons: [
+        getAbsolutePath('@chromatic-com/storybook'),
+        getAbsolutePath('@storybook/addon-vitest'),
+        getAbsolutePath('@storybook/addon-a11y'),
+        getAbsolutePath('@storybook/addon-docs'),
+    ],
+    framework: getAbsolutePath('@storybook/react-vite'),
 }
-
-module.exports = config
+export default config
