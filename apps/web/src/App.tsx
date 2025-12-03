@@ -26,7 +26,7 @@ export function App() {
         <trpc.Provider client={trpcClient} queryClient={queryClient}>
             <QueryClientProvider client={queryClient}>
                 <div>hi app</div>
-                <Button variant="secondary"> HI</Button>
+                <Button> HI</Button>
             </QueryClientProvider>
         </trpc.Provider>
     )
