@@ -2,7 +2,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { trpc } from './utils/trpc'
 import { httpBatchLink } from '@trpc/client'
 import superjson from 'superjson'
-import { Button } from '@repo/ui'
+import { HomePage } from './pages/HomePage'
 
 const queryClient = new QueryClient()
 
@@ -25,8 +25,7 @@ export function App() {
     return (
         <trpc.Provider client={trpcClient} queryClient={queryClient}>
             <QueryClientProvider client={queryClient}>
-                <div>hi app</div>
-                <Button variant="default"> HI</Button>
+                <HomePage/>
             </QueryClientProvider>
         </trpc.Provider>
     )

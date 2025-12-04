@@ -1,7 +1,21 @@
 {
-  "eslint.workingDirectories": [
-    {
-      "mode": "auto"
+    "eslint.workingDirectories": [
+        {
+            "mode": "auto"
+        }
+    ],
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "vscode.typescript-language-features",
+    "[typescript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[javascriptreact]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
     }
-  ]
 }
