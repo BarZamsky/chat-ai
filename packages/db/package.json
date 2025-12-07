@@ -3,13 +3,22 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
+    "db:push": "drizzle-kit push",
+    "db:generate": "drizzle-kit generate",
+    "db:studio": "drizzle-kit studio",
+    "db:migrate": "drizzle-kit migrate",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "exports": {
+    ".": "./db.ts",
+    "./schema": "./schema.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.19.0",
   "dependencies": {
+    "dotenv": "^17.2.3",
     "drizzle-orm": "^0.44.7",
     "drizzle-orm-pg": "^0.16.3",
     "pg": "^8.16.3",

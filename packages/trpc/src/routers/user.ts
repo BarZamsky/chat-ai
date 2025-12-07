@@ -1,24 +1,43 @@
 import { privateProcedure } from '../procedures'
 import { createRouter, publicProcedure } from '../trpc'
-import { Context } from '../context'
+import { eq } from 'drizzle-orm'
+import { UserConversationTable } from '@repo/db/schema'
 
 export const userRouter = createRouter({
     // Public procedures
-    getAllUsers: publicProcedure.query(({ ctx }) => {
-        const context = ctx as Context
-        console.log({ context })
-        // return context.db.user.findMany()
+    getUserConversations: publicProcedure.query(async ({ ctx }) => {
+        // Get user conversations with full conversation data and prompts
+        const userConversations = await ctx.db.query.UserConversationTable.findMany({
+            where: eq(UserConversationTable.userId, ctx.user.userId),
+            with: {
+                conversation: {
+                    with: {
+                        prompts: {
+                            orderBy: (prompts, { desc }) => [desc(prompts.createdAt)]
+                        }
+                    }
+                }
+            },
+            orderBy: (userConversations, { desc }) => [desc(userConversations.updatedAt)]
+        })
+
+        // Transform to a cleaner structure
+        return userConversations.map(uc => ({
+            id: uc.conversation.id,
+            createdAt: uc.conversation.createdAt,
+            updatedAt: uc.conversation.updatedAt,
+            prompts: uc.conversation.prompts,
+            // Include the latest prompt for preview
+            latestPrompt: uc.conversation.prompts[0]?.prompt || null,
+            promptCount: uc.conversation.prompts.length
+        }))
     }),
 
     // Private procedures (require authentication)
     me: privateProcedure.query(({ ctx }) => {
-        console.log({ ctx })
-        // Get the current user based on auth context
-        // In a real app, you'd get the user ID from the auth token
-        // For demo purposes, using a hardcoded ID:
-        // const userId = "current-user-id";
-        // return ctx.prisma.user.findUnique({
-        //   where: { id: userId }
-        // });
+        return {
+            userId: ctx.user.userId,
+            name: ctx.user.name
+        }
     }),
 })

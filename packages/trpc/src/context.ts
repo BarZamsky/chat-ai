@@ -2,11 +2,18 @@ import { CreateFastifyContextOptions } from '@trpc/server/adapters/fastify'
 import { db } from '@repo/db'
 
 export interface User {
-    name: string[] | string
+    userId: string
+    name: string
 }
 
 export function createContext({ req, res }: CreateFastifyContextOptions) {
-    const user: User = { name: req.headers.username ?? 'anonymous' }
+    const userId = req.headers['user-id'] ?? req.headers['userid']
+    const username = req.headers['username']
+
+    const user: User = {
+        userId: (Array.isArray(userId) ? userId[0] : userId) ?? 'anonymous',
+        name: (Array.isArray(username) ? username[0] : username) ?? 'anonymous'
+    }
     return { req, res, user, db }
 }
 

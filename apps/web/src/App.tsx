@@ -3,30 +3,45 @@ import { trpc } from './utils/trpc'
 import { httpBatchLink } from '@trpc/client'
 import superjson from 'superjson'
 import { HomePage } from './pages/HomePage'
+import { useUser } from '@clerk/clerk-react'
+import { useMemo } from 'react'
 
 const queryClient = new QueryClient()
 
-const trpcClient = trpc.createClient({
-    links: [
-        httpBatchLink({
-            url: 'http://localhost:4000/api',
-            transformer: superjson,
-        }),
-    ],
-})
-
 export function App() {
-    // const hello = trpc.user.useQuery({ name: 'Bar' })
+    return (
+        <QueryClientProvider client={queryClient}>
+            <TRPCProvider>
+                <HomePage />
+            </TRPCProvider>
+        </QueryClientProvider>
+    )
+}
 
-    // if (hello.isLoading) return <div>Loading...</div>
-    // if (hello.error) return <div>Error: {hello.error.message}</div>
+function TRPCProvider({ children }: { children: React.ReactNode }) {
+    const { user } = useUser()
 
-    // return <h1>{hello.data?.greeting}</h1>
+    // Create tRPC client with user headers - recreate when user changes
+    const trpcClient = useMemo(() => {
+        return trpc.createClient({
+            links: [
+                httpBatchLink({
+                    url: 'http://localhost:4000/api',
+                    transformer: superjson,
+                    headers() {
+                        return {
+                            'user-id': user?.id ?? 'anonymous',
+                            'username': user?.fullName ?? user?.username ?? 'anonymous',
+                        }
+                    },
+                }),
+            ],
+        })
+    }, [user?.id, user?.fullName, user?.username])
+
     return (
         <trpc.Provider client={trpcClient} queryClient={queryClient}>
-            <QueryClientProvider client={queryClient}>
-                <HomePage/>
-            </QueryClientProvider>
+            {children}
         </trpc.Provider>
     )
 }
