@@ -1,12 +1,12 @@
 import { CreateFastifyContextOptions } from '@trpc/server/adapters/fastify'
-import { db } from '@repo/db'
+import { DB } from '@repo/db'
 
 export interface User {
     userId: string
     name: string
 }
 
-export function createContext({ req, res }: CreateFastifyContextOptions) {
+export function createContext({ req, res, db }: CreateFastifyContextOptions & { db: DB }) {
     const userId = req.headers['user-id'] ?? req.headers['userid']
     const username = req.headers['username']
 

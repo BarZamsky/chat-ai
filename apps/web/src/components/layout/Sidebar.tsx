@@ -12,20 +12,17 @@ import {
     Typography,
 } from '@repo/ui'
 import Logo from './assets/logo.svg'
-import { Zap, Sparkles } from 'lucide-react'
+import { Zap, Sparkles, SquareMenu } from 'lucide-react'
 import { SignedOut } from '@clerk/clerk-react'
 import { CreateAccount } from './CreateAccount'
 import { UserActions } from './UserActions'
-import { useQuery, useMutation } from '@tanstack/react-query'
 import { trpc } from '../../utils/trpc'
 
 export const AppSidabar = () => {
     const currentPath = window.location.pathname
 
-    const { data: conversations } = useQuery({
-        queryKey: ['user-conversations'],
-        queryFn: () => trpc.user.getUserConversations.useQuery()
-    })
+    const { data: pastConversations } =
+        trpc.user.getUserConversations.useQuery();
 
     const createConversationMutation = trpc.conversation.createConversation.useMutation({
         onSuccess: (data) => {
@@ -40,8 +37,6 @@ export const AppSidabar = () => {
         createConversationMutation.mutate({})
     }
 
-
-    console.log(conversations)
     return (
         <SidebarComponent collapsible="none" className="p-2 h-screen border-r border-neutral-200">
             <SidebarHeader>
@@ -63,6 +58,25 @@ export const AppSidabar = () => {
                                     </a>
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
+                            {!!pastConversations?.length && (
+                                <>
+                                    <Typography color="neutral-500" className='pt-5'>Past</Typography>
+                                    {pastConversations.map((conversation) => (
+                                        <SidebarMenuItem key={conversation.id}>
+                                            <SidebarMenuButton
+                                                asChild
+                                                isActive={currentPath === `/conversation/${conversation.id}`}
+                                                className="flex items-center gap-2 text-neutral-500 data-[active=true]:bg-neutral-50 hover:bg-neutral-50 hover:text-brand-primary focus:text-brand-primary"
+                                            >
+                                                <a href={`/conversation/${conversation.id}`}>
+                                                    <SquareMenu className="text-neutral-500" />
+                                                    <Typography color="neutral-500">{conversation.latestPrompt || 'Conversation'}</Typography>
+                                                </a>
+                                            </SidebarMenuButton>
+                                        </SidebarMenuItem>
+                                    ))}
+                                </>
+                            )}
                         </SidebarMenu>
                     </SidebarGroupContent>
                 </SidebarGroup>

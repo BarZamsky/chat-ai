@@ -8,6 +8,13 @@
       "when": 1765115985594,
       "tag": "0000_slim_maelstrom",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1765181266315,
+      "tag": "0001_lethal_alex_wilder",
+      "breakpoints": true
     }
   ]
 }

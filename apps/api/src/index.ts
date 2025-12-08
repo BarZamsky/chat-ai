@@ -1,8 +1,13 @@
-import { fastifyTRPCPlugin } from '@trpc/server/adapters/fastify'
+import { CreateFastifyContextOptions, fastifyTRPCPlugin } from '@trpc/server/adapters/fastify'
 import Fastify from 'fastify'
 import cors from '@fastify/cors'
 import { appRouter } from '@repo/trpc'
 import { createContext } from '@repo/trpc'
+import dotenv from "dotenv";
+dotenv.config();
+
+import { createDb } from "@repo/db";
+const db = createDb(process.env.DATABASE_URL!);
 
 const app = Fastify({
     routerOptions: {
@@ -18,7 +23,7 @@ app.register(cors, {
 
 app.register(fastifyTRPCPlugin, {
     prefix: '/api',
-    trpcOptions: { router: appRouter, createContext },
+    trpcOptions: { router: appRouter, createContext: (args: CreateFastifyContextOptions) => createContext({ ...args, db }) },
 })
 
 app.get('/', async () => {
