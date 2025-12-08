@@ -2,13 +2,15 @@
 
 @theme {
   /* Brand colors */
-  --color-brand: #6366f1;
   --color-brand-primary: #4338CA;
   --color-brand-primary-emphasize: #3730a3;
   --color-disabled: #f5f5f5;
   --color-brand-background: #eef2ff;
   --color-primary: #171717;
   --color-primary-foreground: #fafafa;
+  --color-tertiary: #fafafa;
+
+  --color-secondary: #525252;
   
   /* Accent colors for hover states and highlights */
   --color-accent: #f5f5f5;

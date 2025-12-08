@@ -6,7 +6,6 @@ import { UserConversationTable } from '@repo/db/schema'
 export const userRouter = createRouter({
     // Public procedures
     getUserConversations: publicProcedure.query(async ({ ctx }) => {
-        console.log('here')
         // Get user conversations with full conversation data and prompts
         try {
             const userConversations = await ctx.db.query.UserConversationTable.findMany({
@@ -24,8 +23,6 @@ export const userRouter = createRouter({
             })
 
 
-            console.log(userConversations)
-            // Transform to a cleaner structure
             return userConversations.map(uc => ({
                 id: uc.conversation.id,
                 createdAt: uc.conversation.createdAt,

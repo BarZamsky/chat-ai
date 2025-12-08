@@ -12,7 +12,7 @@ type TypographyProps = {
 const _Typography: ForwardRefRenderFunction<HTMLDivElement, TypographyProps> = (
     {
         size = 'sm',
-        color = 'neutral-900',
+        color = 'primary',
         weight = 'normal',
         children,
         className,

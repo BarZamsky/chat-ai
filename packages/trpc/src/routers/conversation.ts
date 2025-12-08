@@ -50,7 +50,6 @@ export const conversationRouter = createRouter({
             try {
                 const [conversation] = await ctx.db.insert(ConversationTable).values({}).returning()
 
-                console.log(conversation)
                 await ctx.db.insert(UserConversationTable)
                     .values({
                         id: userConversationId,

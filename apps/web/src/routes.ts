@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom"
 import { HomePage } from "./pages/HomePage";
 import { PastPromptPage } from "./pages/PastPromptPage";
 
-createBrowserRouter([
+export const router = createBrowserRouter([
   {
     path: "/",
     Component: HomePage,

@@ -2,9 +2,10 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { trpc } from './utils/trpc'
 import { httpBatchLink } from '@trpc/client'
 import superjson from 'superjson'
-import { HomePage } from './pages/HomePage'
 import { useUser } from '@clerk/clerk-react'
 import { useMemo } from 'react'
+import { RouterProvider } from 'react-router-dom'
+import { router } from './routes'
 
 const queryClient = new QueryClient()
 
@@ -12,7 +13,7 @@ export function App() {
     return (
         <QueryClientProvider client={queryClient}>
             <TRPCProvider>
-                <HomePage />
+                <RouterProvider router={router} />
             </TRPCProvider>
         </QueryClientProvider>
     )
