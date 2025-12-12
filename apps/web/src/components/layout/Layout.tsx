@@ -1,10 +1,16 @@
 import { SidebarProvider } from "@repo/ui"
-import { AppSidabar } from './Sidebar'
+import { AppSidebar } from './Sidebar'
+import { MobileSidebar } from "./MobileSidebar"
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <SidebarProvider>
-      <AppSidabar />
+      <MobileSidebar>
+        <AppSidebar />
+      </MobileSidebar>
+      <div className="hidden xl:flex">
+        <AppSidebar />
+      </div>
       {children}
     </SidebarProvider>
   )

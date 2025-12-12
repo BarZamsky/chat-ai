@@ -93,7 +93,7 @@ export const conversationRouter = createRouter({
             }
 
             // Add the prompt
-            const promptId = `prompt_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+            const promptId = uuidv4()
             const [prompt] = await ctx.db.insert(PromptTable)
                 .values({
                     id: promptId,

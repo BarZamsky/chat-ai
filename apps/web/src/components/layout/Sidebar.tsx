@@ -18,9 +18,8 @@ import { trpc } from '../../utils/trpc'
 import { useNavigate } from 'react-router-dom'
 import { SidebarItem } from './SidebarItem'
 
-export const AppSidabar = () => {
+export const AppSidebar = () => {
     const navigate = useNavigate()
-
     const { data: pastConversations } =
         trpc.user.getUserConversations.useQuery();
 
@@ -33,12 +32,12 @@ export const AppSidabar = () => {
         },
     });
 
-    const handleCreateConversation = () => {
+    const handleStartNewChat = () => {
         createConversationMutation.mutate({})
     }
 
     return (
-        <SidebarComponent collapsible="none" className="p-2 h-screen border-r border-neutral-200">
+        <SidebarComponent className="p-2 border-r border-neutral-200">
             <SidebarHeader>
                 <img src={Logo} alt="Logo" />
             </SidebarHeader>
@@ -60,7 +59,7 @@ export const AppSidabar = () => {
                 </SidebarGroup>
             </SidebarContent>
             <SidebarFooter className="flex flex-col gap-8">
-                <Button variant="secondary" onClick={handleCreateConversation}>
+                <Button variant="secondary" onClick={handleStartNewChat}>
                     <Sparkles />
                     Start new chat
                 </Button>
